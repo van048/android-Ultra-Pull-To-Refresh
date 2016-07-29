@@ -18,6 +18,7 @@ public class DemoRequestData {
         request.setCacheTime(3600);
         request.setTimeout(1000);
         request.getRequestData().setRequestUrl(url);
+        // TODO: 2016/6/14 what for? I think it is for displaying at the beginning, equivalent to last cache data
         request.setAssertInitDataPath("request_init/demo/image-list.json");
         request.setCacheKey("image-list-1");
         request.send();

@@ -24,6 +24,8 @@ import in.srain.cube.views.ptr.demo.R;
 import in.srain.cube.views.ptr.demo.data.DemoRequestData;
 import in.srain.cube.views.ptr.demo.ui.MaterialStyleFragment;
 
+// load more sees https://github.com/liaohuqiu/android-cube-app
+// https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh/issues/119
 public class WithListView extends TitleBaseFragment {
 
     private ImageLoader mImageLoader;
@@ -42,6 +44,7 @@ public class WithListView extends TitleBaseFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh/issues/167
                 if (position >= 0) {
                     final String url = mAdapter.getItem(position).optString("pic");
                     if (!TextUtils.isEmpty(url)) {

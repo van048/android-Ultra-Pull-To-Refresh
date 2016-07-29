@@ -14,6 +14,7 @@ import in.srain.cube.views.ptr.util.PtrCLog;
  * support: pull to refresh / release to refresh / auto refresh / keep header view while refreshing / hide header view while refreshing
  * It defines {@link in.srain.cube.views.ptr.PtrUIHandler}, which allows you customize the UI easily.
  */
+// https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh/issues/233
 public class PtrFrameLayout extends ViewGroup {
 
     // status enum
@@ -107,6 +108,7 @@ public class PtrFrameLayout extends ViewGroup {
         mScrollChecker = new ScrollChecker();
 
         final ViewConfiguration conf = ViewConfiguration.get(getContext());
+        // getScaledTouchSlop是一个距离，表示滑动的时候，手的移动要大于这个距离才开始移动控件。如果小于这个距离就不触发移动控件，如viewpager就是用这个距离来判断用户是否翻页
         mPagingTouchSlop = conf.getScaledTouchSlop() * 2;
     }
 

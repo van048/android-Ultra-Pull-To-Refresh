@@ -17,6 +17,8 @@ import in.srain.cube.views.list.ListViewDataAdapter;
 import in.srain.cube.views.ptr.demo.R;
 import in.srain.cube.views.ptr.demo.ui.MaterialStyleFragment;
 
+// https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh/issues/32
+// 在PtrFrameLayout中套嵌一个HorizontalListview会产生滑动冲突~
 public class ViewPagerFragment extends CubeFragment {
 
     private int mPage;
