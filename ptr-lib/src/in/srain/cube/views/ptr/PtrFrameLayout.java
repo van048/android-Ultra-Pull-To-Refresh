@@ -316,10 +316,18 @@ public class PtrFrameLayout extends ViewGroup {
                 float offsetX = mPtrIndicator.getOffsetX();
                 float offsetY = mPtrIndicator.getOffsetY();
 
-                if (mDisableWhenHorizontalMove && !mPreventForHorizontal && (Math.abs(offsetX) > mPagingTouchSlop && Math.abs(offsetX) > Math.abs(offsetY))) {
-                    if (mPtrIndicator.isInStartPosition()) {
-                        mPreventForHorizontal = true;
-                    }
+//                if (mDisableWhenHorizontalMove && !mPreventForHorizontal && (Math.abs(offsetX) > mPagingTouchSlop && Math.abs(offsetX) > Math.abs(offsetY))) {
+//                    if (mPtrIndicator.isInStartPosition()) {
+//                        mPreventForHorizontal = true;
+//                    }
+//                }
+
+                // fixed by benyang https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh/issues/32
+                if (mDisableWhenHorizontalMove && !mPreventForHorizontal && (Math.abs(offsetX) > mPagingTouchSlop || Math.abs(offsetX) > Math.abs(offsetY))) {
+                    mPreventForHorizontal = true;
+                }
+                if (mStatus == PTR_STATUS_LOADING || mStatus == PTR_STATUS_COMPLETE) {
+                    mPreventForHorizontal = false;
                 }
                 if (mPreventForHorizontal) {
                     return dispatchTouchEventSupper(e);
