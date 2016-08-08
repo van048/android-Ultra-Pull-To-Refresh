@@ -99,6 +99,8 @@ public class WithListView extends TitleBaseFragment {
                     public void run() {
                         mAdapter.getDataList().clear();
                         mAdapter.getDataList().addAll(data.optJson("data").optJson("list").toArrayList());
+                        // if data updated failed, set false; otherwise set true
+                        mPtrFrame.setDataUpdatedSuccess(false);
                         mPtrFrame.refreshComplete();
                         mAdapter.notifyDataSetChanged();
                     }

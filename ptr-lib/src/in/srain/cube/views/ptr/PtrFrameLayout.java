@@ -69,6 +69,7 @@ public class PtrFrameLayout extends ViewGroup {
             performRefreshComplete();
         }
     };
+    private boolean mDataUpdatedSuccess;
 
     public PtrFrameLayout(Context context) {
         this(context, null);
@@ -945,6 +946,14 @@ public class PtrFrameLayout extends ViewGroup {
         final MotionEvent last = mLastMoveEvent;
         MotionEvent e = MotionEvent.obtain(last.getDownTime(), last.getEventTime(), MotionEvent.ACTION_DOWN, last.getX(), last.getY(), last.getMetaState());
         dispatchTouchEventSupper(e);
+    }
+
+    public boolean isDataUpdatedSuccess() {
+        return mDataUpdatedSuccess;
+    }
+
+    public void setDataUpdatedSuccess(boolean mDataUpdatedSuccess) {
+        this.mDataUpdatedSuccess = mDataUpdatedSuccess;
     }
 
     public static class LayoutParams extends MarginLayoutParams {

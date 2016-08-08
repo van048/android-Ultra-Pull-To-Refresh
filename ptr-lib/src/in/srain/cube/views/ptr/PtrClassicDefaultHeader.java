@@ -172,7 +172,7 @@ public class PtrClassicDefaultHeader extends FrameLayout implements PtrUIHandler
 
         // update last update time
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(KEY_SharedPreferences, 0);
-        if (!TextUtils.isEmpty(mLastUpdateTimeKey)) {
+        if (!TextUtils.isEmpty(mLastUpdateTimeKey) && frame.isDataUpdatedSuccess()) {
             mLastUpdateTime = new Date().getTime();
             sharedPreferences.edit().putLong(mLastUpdateTimeKey, mLastUpdateTime).commit();
         }
