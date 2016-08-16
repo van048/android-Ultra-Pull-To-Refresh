@@ -999,9 +999,10 @@ public class PtrFrameLayout extends ViewGroup {
                             finish, mStart, mTo, mPtrIndicator.getCurrentPosY(), curY, mLastFlingY, deltaY);
                 }
             }
+            // #239
+            mLastFlingY = curY;
+            movePos(deltaY);
             if (!finish) {
-                mLastFlingY = curY;
-                movePos(deltaY);
                 post(this);
             } else {
                 finish();
