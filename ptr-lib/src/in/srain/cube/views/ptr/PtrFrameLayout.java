@@ -1000,11 +1000,14 @@ public class PtrFrameLayout extends ViewGroup {
                 }
             }
             // #239
-            mLastFlingY = curY;
-            movePos(deltaY);
             if (!finish) {
+                mLastFlingY = curY;
+                movePos(deltaY);
                 post(this);
             } else {
+                if (mPtrIndicator.getCurrentPosY() != mTo) {
+                    movePos(mTo - mPtrIndicator.getCurrentPosY());
+                }
                 finish();
             }
         }
