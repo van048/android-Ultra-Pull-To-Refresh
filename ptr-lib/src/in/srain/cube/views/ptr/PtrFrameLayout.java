@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.*;
 import android.widget.Scroller;
 import android.widget.TextView;
+
 import in.srain.cube.views.ptr.indicator.PtrIndicator;
 import in.srain.cube.views.ptr.util.PtrCLog;
 
@@ -51,6 +52,9 @@ public class PtrFrameLayout extends ViewGroup {
     private int mHeaderHeight;
     private boolean mDisableWhenHorizontalMove = false;
     private int mFlag = 0x00;
+    public static final int TimeInterval = 100;
+    private int mTouchSlop;
+    private long downTime;
 
     // disable when detect moving horizontally
     private boolean mPreventForHorizontal = false;
@@ -110,6 +114,7 @@ public class PtrFrameLayout extends ViewGroup {
 
         final ViewConfiguration conf = ViewConfiguration.get(getContext());
         // getScaledTouchSlop是一个距离，表示滑动的时候，手的移动要大于这个距离才开始移动控件。如果小于这个距离就不触发移动控件，如viewpager就是用这个距离来判断用户是否翻页
+        mTouchSlop = conf.getScaledTouchSlop();
         mPagingTouchSlop = conf.getScaledTouchSlop() * 2;
     }
 
@@ -299,6 +304,7 @@ public class PtrFrameLayout extends ViewGroup {
                 }
 
             case MotionEvent.ACTION_DOWN:
+                downTime = System.currentTimeMillis();
                 mHasSendCancelEvent = false;
                 mPtrIndicator.onPressDown(e.getX(), e.getY());
 
@@ -345,6 +351,14 @@ public class PtrFrameLayout extends ViewGroup {
 
                 // disable move when header not reach top
                 if (moveDown && mPtrHandler != null && !mPtrHandler.checkCanDoRefresh(this, mContent, mHeaderView)) {
+                    return dispatchTouchEventSupper(e);
+                }
+
+                long moveInterval = System.currentTimeMillis() - downTime;
+                if (true) {
+                    PtrCLog.v(LOG_TAG, "ACTION_MOVE: mTouchSlop: %s, offsetY: %s, timeInterval: %s", mTouchSlop, offsetY, moveInterval);
+                }
+                if (Math.abs(offsetY) < mTouchSlop && moveInterval < TimeInterval) {
                     return dispatchTouchEventSupper(e);
                 }
 
